@@ -8,12 +8,12 @@ author: 'CSci 430: Introduction to Operating Systems'
 In this assignment you will be implementing some pieces of a memory
 paging system simulator framework, and you will be implementing a
 Clock page replacement algorithm.  The simulator will allow you to
-take a stream of page references, like we have done by had in our
-written assignments and in class, and simulate a physical memory
-of some number of frames, where placement and replacement
-decisions are made and the content of the physical memory frames
-will change in response to the stream of page references being
-simulated.
+take a stream of page references, like we have done by hand in our
+written assignments and in class. The simulator will simulate a
+physical memory of some number of fixed size frames (e.g. a paging
+system), where placement and replacement decisions are made and the
+content of the physical memory frames will change in response to the
+stream of page references being simulated.
 
 **Questions**
 
@@ -29,7 +29,7 @@ simulated.
 **Objectives**
 
 - Implement a clock paging scheme by hand within a paging system simulator framework.
-- Look at use of C++ virtual classes and virtual class functions for defining
+- Review use of C++ virtual classes and virtual class functions for defining
   an interface/API
 - Better understand how paging systems work, and in particular what information
   is needed to be tracked to make page replacement decisions.
@@ -56,7 +56,7 @@ function that is the main hook into the simulator.  The basic algorithm of
 the paging simulator is to process each new page reference. For each new
 page reference, we first determine if the reference is a "hit" or a "fault".
 If it is a hit, then nothing further needs to be done except to update
-any system usage statistics.  
+any system usage statistics.
 
 For a page fault, the referenced page needs to be loaded into memory.
 When a page fault occurs, if memory is not yet full, a simple
@@ -67,22 +67,30 @@ reference into.  When memory is full, a page replacement decision
 needs to be done first.  The page replacement decision is handled
 by the `doPageReplcement()` and `makeReplacementDecision()` functions.
 
-However implementation of page replacement decisions are done by a separate
+However, implementation of page replacement decisions are done by a separate
 helper class (called `scheme` in the `PagingSystem` simulator).  A abstract
 API/interface has been defined that describes how a page replacement scheme
 class is accessed and used.  The abstract API/base class is defined in
-the files named `PageReplcementScheme.[hpp|cpp]`.  Most of the functions in
-this class are virtual functions, meaning that concrete subclasses must be
-created of this base class and implement those virtual functions.  For the
-assignment you have been given a working `FifoPageReplacementScheme.[hpp|cpp]`
-concrete class that implements the simple FIFO page replacement scheme.
-A class that can act as a `PageReplacementScheme` has the following interface.
-The main function of such a class is the `makeReplacementDecision()` function.
-Whenever memory is full, the paging simulator will call this function to
-ask the page replacement scheme to select which frame of memory should be
-kicked out.  All subclasses of the `PageReplacementScheme` base class need
-to implement an algorithm to be able to select the frame for page replacement
-when needed.
+the files named `PageReplcementScheme.[hpp|cpp]`.  This is an example of
+a [Strategy](https://en.wikipedia.org/wiki/Strategy_pattern) 
+and/or [Template method](https://en.wikipedia.org/wiki/Template_method_pattern) 
+design pattern.
+
+
+Most of the functions in the `PageReplacementScheme` abstract base
+class are virtual functions, meaning that concrete subclasses must be
+created of this base class and implement those virtual functions.  For
+the assignment you have been given a working
+`FifoPageReplacementScheme.[hpp|cpp]` concrete class that implements
+the simple FIFO page replacement scheme.  A class that can act as a
+`PageReplacementScheme` has the following interface.  The main
+function of such a class is the `makeReplacementDecision()` function.
+Whenever memory is full, the paging simulator will call this function
+to ask the page replacement scheme to select which frame of memory
+should be kicked out and replaced with the new page reference.  All
+subclasses of the `PageReplacementScheme` base class need to implement
+an algorithm to be able to select the frame for page replacement when
+needed.
 
 The `PageReplacementScheme` API has a few other functions.  The paging system
 simulator will call the scheme whenever a page hit occurs, because some page
@@ -91,7 +99,6 @@ how often the page has been hit.  Another major API function that the
 `PageReplacementScheme` subclasses implement is the `getSchemeStatus()`
 function, which is called to get a snapshot of the current status of the
 replacement scheme, to get insight into its decision making process.
-
 
 There is a working FIFO page replacement implementation given already to you
 as part of the assignment.  Your main task, after adding some functionality
@@ -116,11 +123,12 @@ setup steps:
 2. Clone the repository using the SSH URL to your host file system
    in VSCode.  Open up this folder in a Development Container to access
    and use the build system and development tools.
-4. Confirm that the project builds and runs, though no tests will be
-   defined or run initially.  If the project does not build on the first
-   checkout, please inform the instructor.  Confirm that you C++
-   Intellisense extension is working, and that your code is being
-   formatted according to class style standards when files are saved.
+4. Confirm that the project builds and runs tests, though tests will
+   initially be failing in this assignment.  If the project does not
+   build on the first checkout, please inform the instructor.  Confirm
+   that your C++ Intellisense extension is working, and that your code
+   is being formatted according to class style standards when files
+   are saved.
 5. You should create the issue for Task 1 and/or for all tasks for the assignment
    now before beginning the first task.  On your GitHub account, go to issues,
    and create it/them from the issue templates for the assignment.  Also make
@@ -138,7 +146,7 @@ create a Clock page replacement algorithm.
 So for this assignment, as usual, you should start by getting all of
 the unit tests to pass, and I strongly suggest you work on
 implementing the functions and passing the tests in the given order.
-To get the simulator class completed you will first need to
+To get the `PagingSystem` class to work you will first need to
 complete the following tasks.
 
 
@@ -146,7 +154,7 @@ complete the following tasks.
 
 The first test case of the unit tests this week simple tests the
 accessor methods of the `PagingSystem` class, and the functions to
-load and generate simulated page streams.  As a warmup exercise the
+load and generate simulated page streams.  As a warm up exercise the
 get accessor methods of the `PagingSystem` class have been left
 unimplemented.  You need to complete these functions to get the first
 test case working: `getMemorySize()`, `getSystemTime()`
@@ -371,7 +379,7 @@ Class style guidelines have been defined for this class.  The
 indentation, where to place opening and closing braces, whitespace
 around operators, etc.  By running the code formatter on your files it
 reformats your code to conform to the defined class style guidelines.
-The code styloe formatter / checker may not be able to fix all style
+The code style formatter / checker may not be able to fix all style
 issues, so I might give comments to you about style issues to fix
 after looking at your code.  But you should pay attention to the
 formatting of the code style defined by this configuration file.
