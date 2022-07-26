@@ -75,7 +75,8 @@ string FifoPageReplacementScheme::getSchemeStatus()
   stringstream out;
 
   // iterate through all memory frames, displaying their content
-  for (int frame = 0; frame < sys->getMemorySize(); frame++)
+  // Task 5: need to access the sys pointer to get the current memory size here
+  for (FrameNumber frame = 0; frame < 0; frame++)
   {
     out << "frame[" << setfill('0') << setw(3) << frame << "] ";
 
@@ -124,7 +125,9 @@ FrameNumber FifoPageReplacementScheme::makeReplacementDecision()
   FrameNumber frameToReplace = framePointer;
 
   // update frame pointer for our next replacement decision
-  framePointer = (framePointer + 1) % sys->getMemorySize();
+  // Task 5: need to do a mod here using actual memory size by accessing
+  // the sys pointer to get the memory size
+  framePointer = (framePointer + 1) % 1;
 
   // return the frame selected for replacement
   return frameToReplace;

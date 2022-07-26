@@ -8,12 +8,12 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 25
+      "points": 23
     },
     {
-      "name": "Task 0 State loadState() operations",
+      "name": "Setup 1 Initial tests of loading and converting page file streams",
       "setup": "make",
-      "run": "./test --list-test-names-only [task0] | grep . && ./test [task0]",
+      "run": "./test --list-test-names-only [setup1] | grep . && ./test [setup1]",
       "input": "",
       "output": "",
       "comparison": "included",
@@ -21,44 +21,84 @@
       "points": 10
     },
     {
-      "name": "Task 1 needsAreMet member function",
+      "name": "Task 1 PagingSystem accessor methods",
       "setup": "make",
       "run": "./test --list-test-names-only [task1] | grep . && ./test [task1]",
       "input": "",
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 15
+      "points": 17
     },
     {
-      "name": "Task 2 findCandidateProcess member function",
+      "name": "Task 2 isMemoryFull() member method",
       "setup": "make",
       "run": "./test --list-test-names-only [task2] | grep . && ./test [task2]",
       "input": "",
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 15
+      "points": 5
     },
     {
-      "name": "Task 3 releaseAllocatedResources member function",
+      "name": "Task 3 isPageHit() member method",
       "setup": "make",
       "run": "./test --list-test-names-only [task3] | grep . && ./test [task3]",
       "input": "",
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 15
+      "points": 10
     },
     {
-      "name": "Task 4 isSafe member function",
+      "name": "Task 4 doPagePlacement() member function",
       "setup": "make",
       "run": "./test --list-test-names-only [task4] | grep . && ./test [task4]",
       "input": "",
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 15
+      "points": 10
+    },
+    {
+      "name": "Task 5 enable Fifo PagingSystem simulations",
+      "setup": "make",
+      "run": "./test --list-test-names-only [task5] | grep . && ./test [task5]",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "Task 6 ClockPageReplacementScheme resetScheme member method initializations",
+      "setup": "make",
+      "run": "./test --list-test-names-only [task6] | grep . && ./test [task6]",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "Task 7 ClockPageReplacementScheme pageHit member method",
+      "setup": "make",
+      "run": "./test --list-test-names-only [task7] | grep . && ./test [task7]",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "Task 8 ClockPageReplacementScheme makeReplacementDecision member method",
+      "setup": "make",
+      "run": "./test --list-test-names-only [task8] | grep . && ./test [task8]",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5
     },
     {
       "name": "system tests",

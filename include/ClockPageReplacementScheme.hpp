@@ -30,10 +30,9 @@ private:
   ///   we select that frame for replcement.  If it is 1, we instead
   ///   set the use bit to 0 and skip this frame and check the next
   ///   frame.
-  int framePointer;
 
-  /// @brief clock unit test task 1, you will need an array
-  ///   of int or bool types to represent a use bit for each
+  /// @brief clock unit test task 6, you will need an array
+  ///   of bool types to represent a use bit for each
   ///   frame of memory.  The actual array should be allocated
   ///   dynamically in the resetScheme() function as described.
   ///   But since this should be a dynamic allocation, you actually

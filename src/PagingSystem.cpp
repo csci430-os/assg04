@@ -144,74 +144,6 @@ void PagingSystem::resetSystem()
 }
 
 /**
- * @brief memorySize accessor
- *
- * Return the memory size of this PagingSystem.  memorySize
- * in this case refers to the number of physical frames being
- * simulated in this system.
- *
- * @returns int The memory size of the current PagingSystem simulation.
- */
-int PagingSystem::getMemorySize() const
-{
-  // unit test task 1, implement accessor/information methods of
-  // simulation class
-  return memorySize;
-}
-
-/**
- * @brief systemTime setter
- *
- * Set the system time to a new time
- * starts at t=0 and increments in discrete time steps.
- *
- * @returns int The current systemTime of this PagingSystem simulation.
- */
-int PagingSystem::getSystemTime() const
-{
-  // unit test task 1, implement accessor/information methods of
-  // simulation class
-  return 0;
-}
-
-/**
- * @brief numPageReferences accessor
- *
- * Return the total number of page references that will be made in
- * the simulation.  Page reference streams can be loaded and unloaded.
- * So this value is the number of page references of current loaded
- * stream to simulate.  If numPageReferences is 0 then no page reference
- * stream is currently available.
- *
- * @returns int The number of page references in the current simulation
- *   stream, 0 if no page reference stream is currently available.
- */
-int PagingSystem::getNumPageReferences() const
-{
-  // unit test task 1, implement accessor/information methods of
-  // simulation class
-  return 0;
-}
-
-/**
- * @brief is memory full
- *
- * Determine if memory is currently completely full (no EMPTY_FRAMEs
- * exist) or not.  Return true if full, false if 1 or more empty
- * frames still present in memory.
- *
- * @returns bool True if memory is completely full, false if 1 ore
- *   more empty memory frames are present.
- */
-bool PagingSystem::isMemoryFull() const
-{
-  // unit test task 2, search memory[], if any frame is empty
-  // then the answer is false, otherwise if all frames
-  // are nonempty, answer should be true
-  return true;
-}
-
-/**
  * @brief page stream as string
  *
  * Return a representation of the simulated page reference stream
@@ -287,6 +219,9 @@ string PagingSystem::getPageStatus() const
 {
   string res;
 
+  // Task 5: After implementing isPageHit() and isMemoryFull()
+  // uncomment the following to display simulation status correctly
+  /*
   if (isPageHit())
   {
     res = "hit";
@@ -299,7 +234,8 @@ string PagingSystem::getPageStatus() const
   {
     res = "fault (placement)";
   }
-
+  */
+  
   return res;
 }
 
@@ -499,26 +435,6 @@ void PagingSystem::generateRandomPageStream(int numPageReferences, int maxPage, 
 }
 
 /**
- * @brief is page a hit
- *
- * Is the current page reference a hit or a miss.  Return
- * true if the current page reference for the current systemTime
- * is somewhere in memory (a hit).  Return false if the current
- * page reference is not in memory (a miss)
- *
- * @returns bool True if the current page reference for the current
- *   systemTime is a hit, false if the reference is a miss.
- */
-bool PagingSystem::isPageHit() const
-{
-  // unit test task 3.  Search current contents of memory[]
-  // to see if the current pageReference for the current
-  // systemTime is in memory or not.  Return true if
-  // the current page referenc eis in memory, false otherwise.
-  return false;
-}
-
-/**
  * @brief systemTime increment
  *
  * Increment the current system time one time step.
@@ -564,6 +480,10 @@ void PagingSystem::processNextPageReference()
 
   // if current page reference is a hit, update system performance
   // statistics and we are done
+  // Task 4: After implementing isPageHit(), isMemoryFull() and doPagePlacement() stub
+  // function, uncomment all of the following if/else block, which make use of all of
+  // these functions.
+  /*
   if (isPageHit())
   {
     // notify paging scheme as it may need to know the page was hit to update
@@ -599,38 +519,10 @@ void PagingSystem::processNextPageReference()
       faultCount++;
     }
   }
-
+  */
+  
   // update system statistics and system simulation variables
   incrementSystemTime();
-}
-
-/**
- * @brief page placement
- *
- * Page placement occurs whenever memory is not yet full and there
- * are free frames available.  A memory management system of course
- * prefers to use a free frame of memory when available rather than
- * going through the expense of selecting and removing a frame.
- * We simulate the simplest page placement for our simulator here.
- * We scan memory and select the first (lowest numbered) free frame
- * of memory for page placement.
- *
- * @throws SimulatorException An exception is thrown if this method
- *   is called when memory is already full.  We cannot do a page
- *   placement into a full memory (that requres a replacement).
- */
-void PagingSystem::doPagePlacement()
-{
-  // unit test task 4, first of all, if memory is full, throw
-  // an exception saying Error, cannot do initial page placement
-  // when memory already full.
-
-  // otherwise if memory is not full, you need to search memory
-  // to find the first empty frame
-
-  // and then once you find the frame, you should put the current
-  // pageReference for the current systemTime into that frame of
-  // memory
 }
 
 /**
@@ -647,6 +539,10 @@ void PagingSystem::doPageReplacement()
 {
   // sanity check, we should only be called when memory is
   // full, throw an exception if this is not the case
+  // Task 5: After implementing isMemoryFull, uncomment the
+  // following test to ensure page replacements are not attempted
+  // when memory is not full
+  /*
   if (not isMemoryFull())
   {
     stringstream msg;
@@ -654,7 +550,8 @@ void PagingSystem::doPageReplacement()
         << " replacement decisions are not made until memory becomes full" << endl;
     throw SimulatorException(msg.str());
   }
-
+  */
+  
   // call method to make the replacment decision and select the frame
   // of memory to be removed
   FrameNumber frameToReplace = makeReplacementDecision();

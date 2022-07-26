@@ -132,10 +132,6 @@ public:
   void resetSystem();
 
   // accessor methods and system information
-  int getMemorySize() const;
-  int getSystemTime() const;
-  int getNumPageReferences() const;
-  bool isMemoryFull() const;
   string pageStreamToString() const;
   string memoryToString() const;
   string getPageStatus() const;
@@ -149,10 +145,8 @@ public:
   void generateRandomPageStream(int numPageReferences, int maxPage = 10, int seed = SEED_TIME);
 
   // methods for running paging system simulation
-  bool isPageHit() const;
   void incrementSystemTime();
   void processNextPageReference();
-  void doPagePlacement();
   void doPageReplacement();
   FrameNumber makeReplacementDecision();
   void runSimulation(bool verbose = false);

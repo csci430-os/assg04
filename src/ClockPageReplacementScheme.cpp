@@ -52,7 +52,7 @@ ClockPageReplacementScheme::~ClockPageReplacementScheme()
  */
 void ClockPageReplacementScheme::resetScheme()
 {
-  // clock unit test task 2, initialze the member variables
+  // clock unit test task 6, initialze the member variables
   // to the values you need to perform the clock algorithm.
   // You should dynamically allocate an array of some type
   // to represent the use bit for each frame.  You should
@@ -82,7 +82,7 @@ void ClockPageReplacementScheme::resetScheme()
  */
 void ClockPageReplacementScheme::pageHit(FrameNumber frame)
 {
-  // clock unit test task 3.  This method is called whenever
+  // clock unit test task 7.  This method is called whenever
   // a page hit occurs in the paging system.  For the clock
   // algorithm, we need to set the use bit to 1 for the frame/page
   // that was just hit.
@@ -104,7 +104,7 @@ void ClockPageReplacementScheme::pageHit(FrameNumber frame)
  */
 string ClockPageReplacementScheme::getSchemeStatus()
 {
-  // clock unit test task 5, implement this method so that full
+  // clock unit test task 9, implement this method so that full
   // system tests will display the status of the clock page
   // replacement algoritm.  Start by copying the implementation
   // of the FifoPageReplacementScheme.getSchemeStatus() method
@@ -129,7 +129,7 @@ string ClockPageReplacementScheme::getSchemeStatus()
  */
 FrameNumber ClockPageReplacementScheme::makeReplacementDecision()
 {
-  // clock unit test 4,  You need to have a frame pointer and
+  // clock unit test 8,  You need to have a frame pointer and
   // a use bit for each frame.  The clock algorithm starts by
   // scanning at the current frame pointed to by the frame pointer.
   // If the frame use bit is 1, it is flipped to 0 and you advance
@@ -145,7 +145,5 @@ FrameNumber ClockPageReplacementScheme::makeReplacementDecision()
   // to the frame after the one that will be replaced, so that
   // you correctly start scanning at the next frame the next
   // time a replacement decision needs to be made.
-
-  // return the frame selected for replacement
   return 0;
 }
