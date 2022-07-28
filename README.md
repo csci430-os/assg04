@@ -152,20 +152,26 @@ complete the following tasks.
 
 ## Task 1: Implement basic `PagingSystem` accessor methods
 
-The first test case of the unit tests this week simply tests some of
+The first setup test case of the unit tests this week simply tests some of
 the accessor methods of the `PagingSystem` class, and the functions to
 load and generate simulated page streams.
 
 As a warm up exercise the get accessor methods of the `PagingSystem`
-class have been left unimplemented.  You need to complete these
+class have been left unimplemented.  You need to implement these
 functions to get the first test case working: `getMemorySize()`,
 `getSystemTime()` `getNumPageReferences()`.  All of these accessor
 methods are simply accessing and returning a corresponding
-member variable of the `PagingSystem` class.
+member variable of the `PagingSystem` class.  These functions have not
+yet been declared, so you have to create a function declaration in the
+`PaginsSystem.hpp` header file, then the implementation in the
+`PagingSystem.cpp` implementation file.  Also remember that all functions
+are required to have proper Doxygen function documentation, so you need to
+create the function documentation as well for each of these functions just
+before each implementaiton.
 
-Each of the 3 accessor methods have a sub task, so define and implement
-them one by 1.  All 3 of these methods should be `const` member methods.
-This is commong for an accessor method, they simply return information
+Each of the 3 accessor methods have a test sub task, so define and implement
+them one by one.  All 3 of these methods should be `const` member methods.
+This is common for an accessor method, they simply return information
 about the current state of the object, they do not cause the state
 of the object to change.  Declaring a member method to be a `const`
 member method guarantees that by calling this method the state of the
@@ -232,7 +238,7 @@ and it also does not actually modify the state of the running
 simulation, so it is required to be a `const` member function.
 
 
-The current page being referenced in the simulation will be
+The current page being referenced in the simulation will be given in
 `pageReference[systemTime]`, that is to say, given the current
 `systemTime` the page referenced at that time by the simulated page
 reference stream is found in the array `pageReference[systemTime]`.
@@ -244,7 +250,7 @@ So a possible pseudocode implemention of this function is as follows:
 
 ```
 for each physical frame of memory
-   if this memory frame holds the current reference page
+   if this memory frame holds the current page reference
       return true, this reference was a hit, we found the page in memory
 	  
 otherwise if no frame currently has the referenced page loaded
@@ -262,10 +268,11 @@ create and push your commit to your GitHub classroom repository.
 ## Task 4: Implement `doPagePlacement()` member method
 
 Before defining the task 4 tests, Start by uncommenting if/else at
-bottom of `processNextPageReference()` for handling a page fault/miss.
-Now that the `isPageHit()` and `isMemoryFull()` are implemented, we can
-uncomment this code, to do placements or replacements, and test your
-implementation of `doPagePlacement()` next.
+bottom of `processNextPageReference()` in `PagingSystem.cpp` for
+handling a page fault/miss.  Now that the `isPageHit()` and
+`isMemoryFull()` are implemented, we can uncomment this code, to do
+placements or replacements, to test your implementation of
+`doPagePlacement()` next.
 
 The code will not compile after uncommenting at this point until you
 also create at least a stub function for the `doPagePlacement()`
@@ -274,17 +281,18 @@ and stub function for `doPagePlacement()`, and make sure code is
 compiling and running again before proceeding.
 
 The `doPagePlacement()` member method does change the state of the
-simulation, so it is not a `const` member method.  This method does not
-have any input parameters, and it is a `void` function that does not return any
-result.  All of the work it performs is done as a side effect, it places
-a newly referenced page into the simulated memory.
+simulation, so it is not a `const` member method this time.  This
+method does not have any input parameters, and it is a `void` function
+that does not return any result.  All of the work it performs is done
+as a side effect, it places a newly referenced page into the simulated
+memory.
 
-Basic paging systems usuall split loading a new page into two separate
-cases.  When there is still free frames of memory available, simple
+Basic paging systems usually split loading a new page into two separate
+cases.  When there are still free frames of memory available, simple
 page placements are performed, where a free frame is picked and the
 page that was referenced is loaded into that free frame.  We can
 commonly use a simple frame pointer, or just pick the first free frame
-in physical memory to do this placement, as for a paging system
+in physical memory to do this placement, because for a paging system
 initial placement has no performance implications.  However, when
 memory is full, we instead have to make a replacement decision first,
 where we select a frame of memory with a page in it to kick out of
@@ -316,7 +324,7 @@ if memory is full
    
 for each frame of memory
    if this frame of memory is empty
-      place the current reference page in this empty frame
+      place the current page reference in this empty frame
 	  and return immediatly (e.g. don't make mistake of putting page in multiple empty frames)
 ```
 
@@ -340,7 +348,7 @@ Start by uncommenting the code that uses `getMemorySize()`, `isPageHit()` and
 enabled some of this in previous task.  You should find there is code also commented
 out in the following functions of the `PagingSystem` that needs to be enabled:
 
-- `getPageStatys()` needs to call both `isPageHit()` and `isMemoryFull()` to determine
+- `getPageStatus()` needs to call both `isPageHit()` and `isMemoryFull()` to determine
   status for output for full simulations.
 - You should already have enabled the use of `isPageHit()`,
   `isMemoryFull()` and `doPagePlacement()` in the
@@ -387,6 +395,8 @@ If you successfully enable that code in the simulation, you should now be able
 to define the task 5 tests, and they should all run and successfully pass now, if
 you haven't missed anything.  The task 5 tests check that full simulations using
 the default Fifo page replacement policy are now working and running as expected.
+You should also find that all of the system tests that use the Fifo page replacment
+scheme will now pass as well.
 
 Once you have enabled the described functionality and are able to pass full
 simulation tests, commit your code for task 5 and push it to your GitHub
@@ -394,12 +404,13 @@ classroom repository.
 
 # Assignment Tasks (ClockPageReplacementScheme)
 
-Once these 4 tasks are complete, the first 5 test cases of this
+Once these 5 tasks are complete, the first 5 test cases of this
 assignment should be passing.  These test the simulator, load
 page streams, and test using the basic FIFO page replacement
 scheme to make page replacement decisions.  However the final
-test Case 6 will not be working as it tests the Clock
-page replacement scheme class.
+unit tests and the system tests of the Clock page replacement
+algorithm will not pass until we fully implement the
+Clock paging algorithm.
 
 So the next step is to implement a Clock page replacement policy.
 Most of the functions in the `ClockPageReplacementScheme.[hpp|cpp]`
@@ -430,8 +441,12 @@ You will need a `framePointer` for your clock scheme, just like the
 FIFO page replacement scheme.  But you will also need to keep an array
 of use bits, 1 bit for each physical frame of memory.  You are required
 to use an array of `bool` bits for your use bits array.  This array
-must be called `useBit[]`, as this will be tested explicitly in the
-task 6 tests.
+must be called `useBit`, as this will be tested explicitly in the
+task 6 tests.  You will need to dynamically allocate the memory for the
+array of use bit values, depending on the simulation memory
+size.  So you should declare the member variable to be a `bool*`, a pointer
+to a bool, so you can dynamically allocate a block of bool values
+to use as the `useBit`
 
 You have been given the implementation of the constructor for your
 class.  It works the same as the FIFO class, it simply calls the base
@@ -473,7 +488,7 @@ copy to begin with here).  But for the Clock scheme, you have to set
 the use bit to true (1) for a page hit.  When the `pageHit()` function
 is called, the frame number of the page that was hit is provided as
 the parameter, so you simply need to set the use bit of that
-corresponding frame to 1 to handle a page hit.
+corresponding frame to true to handle a page hit.
 
 You should define the task 7 tests, and implement the `pageHit()`
 function to correctly set the use bit of the indicated frame
@@ -485,18 +500,19 @@ Feedback pull request of your GitHub classroom repository.
 
 ## Task 8: Implement `makeReplacementDecision()` member method
 
-Implement the `makeReplacementDecision()` function next.  The
+Finally implement the `makeReplacementDecision()` function.  The
 replacement decision for Clock is more complex than for Fifo, though you
 can start by copying the Fifo replacement decision function.
 
 For Clock, you have a `framePointer`, just like for the Fifo scheme.
 But you don't just immediately replace the frame that the
 `framePointer` is pointing to.  You first need to scan memory until
-you find the next frame that has a use bit set to false (0).  So if the frame
-that the frame pointer has a use bit of true (1), you need to flip it to false (0)
-and move to the next frame.  Thus you need to implement a loop here
-that keeps checking the use bit, and flipping it to false until it finds a
-use bit that is unset.
+you find the next frame that has a use bit set to false (0).  So if
+the frame that the frame pointer points too has a use bit of true (1),
+you need to flip it to false (0) and move to the next frame.  Thus you
+need to implement a loop here that keeps checking the use bit, and
+flipping it to false until it finds a use bit that is unset, wrapping
+around to the beginning of the memory buffer as needed.
 
 Once a frame is found with a use bit of false, that should be the
 frame that is selected to be replaced.  That frame number should be

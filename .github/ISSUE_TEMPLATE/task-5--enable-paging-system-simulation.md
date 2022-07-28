@@ -12,7 +12,7 @@ Uncomment disabled code in the `PagingSystem` implementation file to
 enable full simulations.  Check the following member functions to find
 disable code and make sure it is enabled:
 
-- `getPageStatys()` needs to call both `isPageHit()` and `isMemoryFull()` to determine
+- `getPageStatus()` needs to call both `isPageHit()` and `isMemoryFull()` to determine
   status for output for full simulations.
 - You should already have enabled the use of `isMemoryFull()` and `doPagePlacement()`
   in the `processNextPageReference()` method in previous task 4.

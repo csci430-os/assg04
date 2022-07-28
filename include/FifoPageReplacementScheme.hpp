@@ -29,7 +29,7 @@ private:
   ///   frame pointer will be selected for replacement, and
   ///   it will be incremented to the next frame (using a circular
   ///   wrap around) for the next replacement decision.
-  int framePointer;
+  FrameNumber framePointer;
 
 public:
   FifoPageReplacementScheme(PagingSystem* sys);

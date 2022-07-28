@@ -58,7 +58,7 @@ void ClockPageReplacementScheme::resetScheme()
   // to represent the use bit for each frame.  You should
   // initialize your use bits here as well.  Since clock
   // replacement begins after memory is full, you probably need
-  // to initialize all use bits to 1, in anticipation of the
+  // to initialize all use bits to true, in anticipation of the
   // initial load of each page into the empty frame.
   // Also, there is a member variable named sys that is
   // a pointer to the PagingSystem instance that this scheme
