@@ -167,7 +167,7 @@ yet been declared, so you have to create a function declaration in the
 `PagingSystem.cpp` implementation file.  Also remember that all functions
 are required to have proper Doxygen function documentation, so you need to
 create the function documentation as well for each of these functions just
-before each implementaiton.
+before each implementation.
 
 Each of the 3 accessor methods have a test sub task, so define and implement
 them one by one.  All 3 of these methods should be `const` member methods.
@@ -246,7 +246,7 @@ Given the current `systemTime`, the `isPageHit()` function should
 return `true` if the page being referenced is currently in `memory`
 (which is a page hit).  Otherwise it should return `false`.
 
-So a possible pseudocode implemention of this function is as follows:
+So a possible pseudocode implement ion of this function is as follows:
 
 ```
 for each physical frame of memory
@@ -259,7 +259,7 @@ then return false, this reference was a miss
 
 Make sure that you are creating Doxygen function documentation for all
 functions when you commit them to your repository as you are writing each
-one.  The funciton documentation should be present as part of the commit
+one.  The function documentation should be present as part of the commit
 for each task.
 
 Once your implementation is working and passing the tests for task 3,
@@ -313,7 +313,7 @@ find the first frame that is an `EMPTY_FRAME`.  Once found, this frame
 should be replaced with the current page reference
 (e.g. `pageReference[systemTime]`).
 
-So an example implementation of the `doPagePlacement()` funciton might
+So an example implementation of the `doPagePlacement()` function might
 look like this:
 
 ```
@@ -325,7 +325,7 @@ if memory is full
 for each frame of memory
    if this frame of memory is empty
       place the current page reference in this empty frame
-	  and return immediatly (e.g. don't make mistake of putting page in multiple empty frames)
+	  and return immediately (e.g. don't make mistake of putting page in multiple empty frames)
 ```
 
 Once your implementation compiles and passes the unit tests for task 4, commit
@@ -395,7 +395,7 @@ If you successfully enable that code in the simulation, you should now be able
 to define the task 5 tests, and they should all run and successfully pass now, if
 you haven't missed anything.  The task 5 tests check that full simulations using
 the default Fifo page replacement policy are now working and running as expected.
-You should also find that all of the system tests that use the Fifo page replacment
+You should also find that all of the system tests that use the Fifo page replacement
 scheme will now pass as well.
 
 Once you have enabled the described functionality and are able to pass full
@@ -425,7 +425,7 @@ functionality.  The Clock page replacement scheme is a combination
 of a Fifo scheme and the Least Recently Used (LRU) scheme, as you
 should have learned from your materials for this unit.  You should
 look at the implementation of these member methods in the `FifoPageReplacementScheme`
-and modify them for your implementation of the Clock schem.  In fact,
+and modify them for your implementation of the Clock scheme.  In fact,
 a good starting point for all of the following tasks is to copy the method
 from the Fifo scheme, then modify it for the described Clock scheme.
 
@@ -461,7 +461,7 @@ Subclasses of the `PageReplacementScheme` have a member variable named
 `sys` which is a pointer to an instance of the `PagingSystem` class
 that the scheme is working with.  In task 5 you had to add some code
 to the Fifo class to find out the memory size of the current
-simulation.  Likewise, ou can query the `sys` object for this needed
+simulation.  Likewise, you can query the `sys` object for this needed
 information here as well.  For example you can do
 `sys->getMemorySize()` to find out what the size of the simulated
 memory is.
@@ -536,7 +536,7 @@ remember this frame pointer as it should be returned as the candidate frame to r
 but before returning set the use bit of the frame to replace to true
 and increment the frame pointer by 1, wrapping around the end of the buffer if needed
 
-return the rememered frame pointer for replacement
+return the remembered frame pointer for replacement
 ```
 
 Once you are satisfied with your implementation and are passing the task 8 tests,
@@ -757,12 +757,12 @@ function you write for this assignment looks like this:
  *   given the limits of the expected opcode format.
  */
  ```
-This is an example of a `doxygen` formatted code documentation comment.
-The two `**` starting the block comment are required for `doxygen` to
+This is an example of a `Doxygen` formatted code documentation comment.
+The two `**` starting the block comment are required for `Doxygen` to
 recognize this as a documentation comment.  The `@brief`, `@param`,
-`@exception` etc. tags are used by `doxygen` to build reference
+`@exception` etc. tags are used by `Doxygen` to build reference
 documentation from your code.  You can build the documentation using the
-`make docs` build target, though it does require you to have `doxygen`
+`make docs` build target, though it does require you to have `Doxygen`
 tools installed on your system to work.
 
 ```
